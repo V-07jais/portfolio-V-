@@ -1,96 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Varsha Jaiswal | Portfolio</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background-color: #ffffff;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #666;
-    }
-    section {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    h2 {
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-      color: #444;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 0.5rem;
-    }
-    .contact a {
-      color: #0077b5;
-      text-decoration: none;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varsha Jaiswal | Portfolio</title>
+    <!-- Modern Font Integration -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern CSS Reset & Variables */
+        :root {
+            --bg-color: #fcfbf9;
+            --text-main: #2d2d2d;
+            --text-muted: #666666;
+            --accent-color: #8c7853; /* Elegant muted gold accent */
+            --card-bg: #ffffff;
+            --border-color: #e5e0d8;
+            --max-width: 760px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 4rem 2rem;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        /* Profile Header Section */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* Profile Sections */
+        section {
+            margin-bottom: 3.5rem;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-color);
+            opacity: 0.3;
+        }
+
+        p.about-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        /* Elegant Grid for Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(140, 120, 83, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(140, 120, 83, 0.06);
+        }
+
+        .skill-card h3 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-tags {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        /* Refined Links & Contacts */
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            background-color: #fffbf5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 6rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 600px) {
+            body {
+                padding: 2rem 1.5rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .contact-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Varsha Jaiswal</h1>
-    <p>Computer Science Engineer</p>
-  </header>
 
-  <section>
-    <h2>About Me</h2>
-    <p>
-      I am a B.Tech CSE undergraduate student with a strong enthusiasm for software development.
-      My journey is fueled by a curiosity to solve problems and a drive to create clean, efficient,
-      and user-friendly applications. I believe in the power of continuous learning and hands-on
-      experience to build a solid foundation for a career in technology.
-    </p>
-  </section>
+    <div class="container">
+        
+        <!-- Header -->
+        <header>
+            <h1>Varsha Jaiswal</h1>
+            <div class="subtitle">Computer Science Engineer</div>
+        </header>
 
-  <section>
-    <h2>Skills</h2>
-    <ul>
-      <li><strong>Programming Languages:</strong> C</li>
-      <li><strong>Creative Tools:</strong> Canva</li>
-    </ul>
-  </section>
+        <!-- About Me Section -->
+        <section>
+            <h2>About Me</h2>
+            <p class="about-text">
+                I am a B.Tech CSE undergraduate student with a strong enthusiasm for software development. My journey is fueled by a curiosity to solve problems and a drive to create clean, efficient, and user-friendly applications. I believe in the power of continuous learning and hands-on experience to build a solid foundation for a career in technology.
+            </p>
+        </section>
 
-  <section class="contact">
-    <h2>Contact</h2>
-    <ul>
-      <li><strong>Email:</strong> <a href="mailto:jaiswalvarsha943@gmail.com">jaiswalvarsha943@gmail.com</a></li>
-      <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/varsha-jaiswal-a95890319" target="_blank">Varsha Jaiswal</a></li>
-      <li><strong>GitHub:</strong> <a href="https://github.com/V-07jais" target="_blank">V-07jais</a></li>
-    </ul>
-  </section>
+        <!-- Refined Skills Section -->
+        <section>
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-tags">C</div>
+                </div>
+                <div class="skill-card">
+                    <h3>Creative Tools</h3>
+                    <div class="skill-tags">Canva</div>
+                </div>
+            </div>
+        </section>
 
-  <footer>
-    &copy; 2025 Varsha Jaiswal. All rights reserved.
-  </footer>
+        <!-- Elegant Contact Links -->
+        <section>
+            <h2>Contact & Socials</h2>
+            <div class="contact-grid">
+                <a href="mailto:jaiswalvarsha943@gmail.com" class="contact-link">📧 Email</a>
+                <a href="https://linkedin.com/in/Varsha Jaiswal" target="_blank" class="contact-link">🔗 LinkedIn</a>
+                <a href="https://github.com/V-07jais" target="_blank" class="contact-link">💻 GitHub Profile</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            &copy; 2026 Varsha Jaiswal. All rights reserved.
+        </footer>
+
+    </div>
+
 </body>
 </html>
