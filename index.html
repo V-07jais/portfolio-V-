@@ -3,233 +3,1011 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Varsha Jaiswal | Portfolio</title>
-    <!-- Modern Font Integration -->
+    <title>Varsha Jaiswal | AI & Research Enthusiast</title>
+    <!-- Google Fonts & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Modern CSS Reset & Variables */
+        /* Modern CSS Variables & Deep Dark Theme Setup */
         :root {
-            --bg-color: #fcfbf9;
-            --text-main: #2d2d2d;
-            --text-muted: #666666;
-            --accent-color: #8c7853; /* Elegant muted gold accent */
-            --card-bg: #ffffff;
-            --border-color: #e5e0d8;
-            --max-width: 760px;
+            --bg-deep: #0b071a;
+            --bg-surface: rgba(20, 15, 38, 0.6);
+            --border-glow: rgba(147, 51, 234, 0.2);
+            --border-hover: rgba(168, 85, 247, 0.4);
+            --text-primary: #f3f1f7;
+            --text-secondary: #a7a2bc;
+            --accent-purple: #9333ea;
+            --accent-violet: #a855f7;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.7;
-            padding: 4rem 2rem;
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
         }
 
+        /* Ambient Animated Tech Background Setup */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .gradient-blob {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, rgba(0,0,0,0) 70%);
+            top: 20%;
+            left: -10%;
+            z-index: -2;
+            animation: floatBlob 12s infinite alternate ease-in-out;
+        }
+
+        .gradient-blob.right {
+            top: 60%;
+            left: 80%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(0,0,0,0) 70%);
+            animation: floatBlob 16s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes floatBlob {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(40px) scale(1.15); }
+        }
+
+        /* Scroll Progress Indicator Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent-purple), var(--accent-violet));
+            width: 0%;
+            z-index: 999;
+        }
+
+        /* Global Structural Layout & Containers */
         .container {
-            max-width: var(--max-width);
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        /* Profile Header Section */
-        header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        /* Profile Sections */
         section {
-            margin-bottom: 3.5rem;
+            padding: 6rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        h2 {
-            font-size: 1.3rem;
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
             font-weight: 600;
-            letter-spacing: -0.01em;
-            margin-bottom: 1.2rem;
+            margin-bottom: 3rem;
             position: relative;
             display: inline-block;
+            letter-spacing: -0.02em;
         }
 
-        h2::after {
+        .section-title::after {
             content: '';
             position: absolute;
             left: 0;
-            bottom: -4px;
-            width: 100%;
-            height: 2px;
-            background-color: var(--accent-color);
-            opacity: 0.3;
+            bottom: -6px;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent-purple), var(--accent-violet));
+            border-radius: 2px;
         }
 
-        p.about-text {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            text-align: justify;
+        /* Glassmorphism Card System Styling */
+        .glass-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Elegant Grid for Skills */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-top: 0.5rem;
+        .glass-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.1);
+            transform: translateY(-4px);
         }
 
-        .skill-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 12px rgba(140, 120, 83, 0.03);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(140, 120, 83, 0.06);
-        }
-
-        .skill-card h3 {
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .skill-tags {
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--text-main);
-        }
-
-        /* Refined Links & Contacts */
-        .contact-grid {
+        /* Interactive Buttons & Control Modules */
+        .btn-group {
             display: flex;
-            flex-wrap: wrap;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .contact-link {
+        .btn {
             display: inline-flex;
             align-items: center;
-            padding: 0.6rem 1.2rem;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.95rem;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-family: var(--font-display);
             font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-violet));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+            border: 1px solid var(--border-glow);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--border-hover);
+        }
+
+        /* Hero Landing Section Viewport Config */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #c084fc, #e879f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-description {
+            max-width: 600px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Dynamic Auto-Typing Display Framework */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: var(--accent-violet);
+            margin-left: 4px;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { background-color: transparent }
+            50% { background-color: var(--accent-violet); }
+        }
+
+        /* Deep Profile Layout Configurations */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            border: 1px solid var(--border-glow);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(105%);
+            transition: transform 0.5s ease;
+        }
+
+        .profile-wrapper:hover .profile-img {
+            transform: scale(1.05);
+        }
+
+        .about-subtitle {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        .explore-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .explore-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .explore-list li i {
+            color: var(--accent-violet);
+            font-size: 0.8rem;
+        }
+
+        /* Highly-Functional Matrix Grid for Technical Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-section-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--accent-violet);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(147, 51, 234, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
             transition: all 0.2s ease;
         }
 
-        .contact-link:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            background-color: #fffbf5;
+        .skill-tag:hover {
+            background: rgba(147, 51, 234, 0.1);
+            border-color: var(--accent-violet);
+            color: white;
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            margin-top: 6rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
+        /* Asymmetric Architecture Timeline Structures */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-purple), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: calc(-2rem - 5px);
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-violet);
+            box-shadow: 0 0 10px var(--accent-purple);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-year {
+            font-family: var(--font-display);
+            color: var(--accent-violet);
+            font-weight: 600;
+        }
+
+        .timeline-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .timeline-org {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .timeline-meta {
+            font-size: 0.9rem;
+            color: var(--accent-violet);
+            font-weight: 500;
+        }
+
+        /* Large Card Presentation Modules for Featured Projects */
+        .project-showcase {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .project-mockup {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(20, 15, 38, 0.8));
+            border-radius: 12px;
+            border: 1px solid var(--border-glow);
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-mockup i {
+            font-size: 4rem;
+            color: rgba(168, 85, 247, 0.4);
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-mockup i {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .project-label {
+            font-family: var(--font-display);
             font-size: 0.85rem;
-            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-violet);
+            margin-bottom: 0.5rem;
         }
 
-        /* Responsive Tweaks */
+        .project-name {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .tech-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chip {
+            background: rgba(147, 51, 234, 0.1);
+            color: #d8b4fe;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Animated Recognition / Achievements Blocks */
+        .achieve-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achieve-card {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .achieve-icon {
+            background: rgba(147, 51, 234, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            color: var(--accent-violet);
+            font-size: 1.25rem;
+        }
+
+        .achieve-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .achieve-detail {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Modernized Interactive Formless Contact Architecture */
+        .contact-layout {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-cta {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links-box {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Custom Structured Footer Configurations */
+        footer {
+            border-top: 1px solid var(--border-glow);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .heartbeat {
+            display: inline-block;
+            color: #ec4899;
+            animation: beat 1.2s infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* Media Queries for Viewport Adaptation & Breakpoints */
+        @media (max-width: 900px) {
+            .about-grid, .project-card {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .profile-wrapper {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+        }
+
         @media (max-width: 600px) {
-            body {
-                padding: 2rem 1.5rem;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            .contact-grid {
-                flex-direction: column;
-            }
+            body { line-height: 1.5; }
+            section { padding: 4rem 0; }
+            .explore-list { grid-template-columns: 1fr; }
+            .timeline-header { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <!-- Header -->
-        <header>
-            <h1>Varsha Jaiswal</h1>
-            <div class="subtitle">Computer Science Engineer</div>
-        </header>
+    <!-- Scroll Progress Indicator Component -->
+    <div id="scroll-progress"></div>
 
-        <!-- About Me Section -->
-        <section>
-            <h2>About Me</h2>
-            <p class="about-text">
-                I am a B.Tech CSE undergraduate student with a strong enthusiasm for software development. My journey is fueled by a curiosity to solve problems and a drive to create clean, efficient, and user-friendly applications. I believe in the power of continuous learning and hands-on experience to build a solid foundation for a career in technology.
+    <!-- Background Technical Canvas Stack -->
+    <canvas id="particle-canvas"></canvas>
+    <div class="gradient-blob"></div>
+    <div class="gradient-blob right"></div>
+
+    <!-- Hero / Landing Terminal Interface -->
+    <section id="home">
+        <div class="container hero-content">
+            <h1 class="hero-title">VARSHA JAISWAL</h1>
+            <div class="hero-tagline">
+                <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
+            </div>
+            <p class="hero-description">
+                Building intelligent systems that bridge technology and science through robust backends, advanced multi-agent structures, and applied computing.
             </p>
-        </section>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-layer-group"></i> View Projects</a>
+                <a href="https://drive.google.com/drive/folders/1NPTodqQQLVEGDySgm5VnHoxTsbcB795k" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-file-invoice"></i> Download Resume</a>
+            </div>
+        </div>
+    </section>
 
-        <!-- Refined Skills Section -->
-        <section>
-            <h2>Skills</h2>
-            <div class="skills-container">
-                <div class="skill-card">
-                    <h3>Programming Languages</h3>
-                    <div class="skill-tags">C</div>
+    <!-- Lab Overview / About Profile View module -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Laboratory</h2>
+            <div class="about-grid">
+                <div class="profile-wrapper">
+                    <!-- Renders profile.jpg uploaded natively in the repository -->
+                    <img src="profile.jpg" alt="Varsha Jaiswal" class="profile-img" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80'">
                 </div>
-                <div class="skill-card">
-                    <h3>Creative Tools</h3>
-                    <div class="skill-tags">Canva</div>
+                <div>
+                    <h3 class="about-subtitle">Hello!</h3>
+                    <p class="about-text">
+                        I'm Varsha Jaiswal, a Computer Science undergraduate engineering student passionate about Artificial Intelligence, backend engineering, and research-driven software deployment. I love analyzing tough design limitations and turning conceptual ideas into highly automated pipelines.
+                    </p>
+                    <p class="about-text" style="margin-top:-1rem;">
+                        Currently pursuing my B.Tech degree, I structure architectures that scale seamlessly, moving beyond manual processes to develop smart, data-driven frameworks.
+                    </p>
+                    <h4 style="margin-bottom: 1rem; font-family:var(--font-display);">Exploring Deeply:</h4>
+                    <ul class="explore-list">
+                        <li><i class="fa-solid fa-microchip"></i> AI Agents & LLM Architectures</li>
+                        <li><i class="fa-solid fa-server"></i> Spring Boot & Backend Systems</li>
+                        <li><i class="fa-solid fa-network-wired"></i> Full-Stack Pipelines</li>
+                        <li><i class="fa-solid fa-flask"></i> Applied Scientific Computing</li>
+                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Elegant Contact Links -->
-        <section>
-            <h2>Contact & Socials</h2>
-            <div class="contact-grid">
-                <a href="mailto:jaiswalvarsha943@gmail.com" class="contact-link">📧 Email</a>
-                <a href="https://linkedin.com/in/Varsha Jaiswal" target="_blank" class="contact-link">🔗 LinkedIn</a>
-                <a href="https://github.com/V-07jais" target="_blank" class="contact-link">💻 GitHub Profile</a>
+    <!-- Core Matrices / Tech Stack Module Component -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Capabilities</h2>
+            <div class="skills-grid">
+                
+                <!-- Programming Card -->
+                <div class="glass-card">
+                    <div class="skill-section-title"><i class="fa-solid fa-code"></i> Languages</div>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">C</span>
+                    </div>
+                </div>
+
+                <!-- Frameworks Card -->
+                <div class="glass-card">
+                    <div class="skill-section-title"><i class="fa-solid fa-cubes"></i> Frameworks</div>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">Pandas</span>
+                    </div>
+                </div>
+
+                <!-- Production Ecosystem Tools -->
+                <div class="glass-card">
+                    <div class="skill-section-title"><i class="fa-solid fa-toolbox"></i> Engineering Tools</div>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag">Gemini API</span>
+                        <span class="skill-tag">Git Version Control</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">VS Code</span>
+                    </div>
+                </div>
+
+                <!-- Human Factors / Professional Soft Capabilities -->
+                <div class="glass-card">
+                    <div class="skill-section-title"><i class="fa-solid fa-brain"></i> Core Strengths</div>
+                    <div class="skill-tags-wrapper">
+                        <span class="skill-tag">Time & Event Management</span>
+                        <span class="skill-tag">Creative Technical Thinking</span>
+                        <span class="skill-tag">Adaptive Fast Learner</span>
+                        <span class="skill-tag">Flexible Execution Roles</span>
+                    </div>
+                </div>
+
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Footer -->
-        <footer>
-            &copy; 2026 Varsha Jaiswal. All rights reserved.
-        </footer>
+    <!-- Experience & Practical Pipelines Timeline -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Training</h2>
+            <div class="timeline">
+                
+                <!-- Experience Block 1 -->
+                <div class="timeline-item glass-card">
+                    <div class="timeline-header">
+                        <div>
+                            <span class="timeline-year">Oct 2025 — Mar 2026</span>
+                            <h3 class="timeline-title">Campus Ambassador Intern (Udgam'26)</h3>
+                            <div class="timeline-org">IIT Guwahati Entrepreneurship Cell</div>
+                        </div>
+                        <span class="timeline-meta">Top 15 Merit Placement</span>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        Acted as primary operational link executing targeted student engagement platforms and technical campaign deployments. Placed within the exclusive top 15 bracket nationwide based on metrics tracking communication strategy performance.
+                    </p>
+                </div>
 
-    </div>
+                <!-- Experience Block 2 -->
+                <div class="timeline-item glass-card">
+                    <div class="timeline-header">
+                        <div>
+                            <span class="timeline-year">Aug 2025</span>
+                            <h3 class="timeline-title">Full-Stack Development Trainee</h3>
+                            <div class="timeline-org">Shri Ramswaroop Digital Technologies Pvt-Ltd</div>
+                        </div>
+                        <span class="timeline-meta">Architecture Focus</span>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        Engaged in dense full-stack development methodologies, mapping application routes and working heavily inside Python frameworks. Constructed interactive project scopes natively using robust MVC patterns.
+                    </p>
+                </div>
 
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Pipeline Showcase Hub -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Research & Engineering Pipelines</h2>
+            <div class="project-showcase">
+                
+                <!-- Main Featured Project Block -->
+                <div class="glass-card project-card">
+                    <div class="project-mockup">
+                        <i class="fa-solid fa-clapperboard"></i>
+                    </div>
+                    <div>
+                        <div class="project-label">Featured Pipeline</div>
+                        <h3 class="project-name">AI Film Line Producer</h3>
+                        <p class="project-desc">
+                            An automated pre-production engine that strips raw script data instantly into structural data. Using an advanced multi-agent pipeline backed by Spring Boot, the first agent extracts artistic tokens (characters, setting tracking, emotional arcs) while a downstream agent renders those details into computational log sheets mapping crew assets, cameras, and equipment needs.
+                        </p>
+                        <div class="tech-chips">
+                            <span class="chip">Java</span>
+                            <span class="chip">Spring Boot</span>
+                            <span class="chip">Gemini 2.5 Flash</span>
+                            <span class="chip">Multi-Agent AI</span>
+                            <span class="chip">REST Framework</span>
+                        </div>
+                        <div class="btn-group">
+                            <a href="https://ai-film-agent.onrender.com" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-bolt"></i> Live Launch</a>
+                            <a href="https://github.com/V-07jais/AI-film-agent" target="_blank" class="btn btn-secondary btn-sm"><i class="fa-brands fa-github"></i> Repository</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template Placeholding Module for Future Project 2 Insertion -->
+                <div class="glass-card project-card" style="opacity:0.75; border-style: dashed;">
+                    <div class="project-mockup" style="background: transparent;">
+                        <i class="fa-solid fa-terminal"></i>
+                    </div>
+                    <div>
+                        <div class="project-label">System Module 02</div>
+                        <h3 class="project-name">Project Sandbox</h3>
+                        <p class="project-desc">
+                            A custom system framework mapping platform tools that allow dynamic community sharing, user profiles, and tracking updates. Ready for rapid updates.
+                        </p>
+                        <div class="tech-chips">
+                            <span class="chip">Python</span>
+                            <span class="chip">Django</span>
+                            <span class="chip">Ecosystem Architecture</span>
+                        </div>
+                        <span style="font-size: 0.85rem; color: var(--accent-violet); font-style: italic;"><i class="fa-solid fa-code-branch"></i> Upcoming module addition...</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Institutional Education Matrix Setup -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Academic Baseline</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item glass-card">
+                    <div class="timeline-header">
+                        <div>
+                            <span class="timeline-year">2024 — 2028</span>
+                            <h3 class="timeline-title">B.Tech in Computer Science & Engineering</h3>
+                            <div class="timeline-org">AKTU | Shri Ramswaroop Memorial College (SRMCEM)</div>
+                        </div>
+                        <span class="timeline-meta">Current CGPA: 7.3/10</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item glass-card">
+                    <div class="timeline-header">
+                        <div>
+                            <span class="timeline-year">2023 Passed</span>
+                            <h3 class="timeline-title">Intermediate Studies (Class XII)</h3>
+                            <div class="timeline-org">Maa Vaishno Inter College | UP Board</div>
+                        </div>
+                        <span class="timeline-meta">Performance Score: 83.6% (PCM)</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item glass-card">
+                    <div class="timeline-header">
+                        <div>
+                            <span class="timeline-year">2021 Passed</span>
+                            <h3 class="timeline-title">High School Examination (Class X)</h3>
+                            <div class="timeline-org">Maa Vaishno Inter College | UP Board</div>
+                        </div>
+                        <span class="timeline-meta">Performance Score: 88.0%</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Commendations, Achievements & Encrypted Certificates Hub -->
+    <section id="achievements">
+        <div class="container">
+            <h2 class="section-title">Validations & Awards</h2>
+            <div class="achieve-grid" style="margin-bottom: 3rem;">
+                
+                <div class="glass-card achieve-card">
+                    <div class="achieve-icon"><i class="fa-solid fa-palette"></i></div>
+                    <div>
+                        <h4 class="achieve-title">First Place Distinction</h4>
+                        <p class="achieve-detail">Awarded 1st Place at the SRMCEM Adhivakti Fine Art Competition (2026).</p>
+                    </div>
+                </div>
+
+                <div class="glass-card achieve-card">
+                    <div class="achieve-icon"><i class="fa-solid fa-medal"></i></div>
+                    <div>
+                        <h4 class="achieve-title">Elite Campus Track</h4>
+                        <p class="achieve-detail">Ranked in the top 15 across India for operational management metrics at IIT Guwahati.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card achieve-card">
+                    <div class="achieve-icon"><i class="fa-solid fa-graduationcap"></i></div>
+                    <div>
+                        <h4 class="achieve-title">Summer Training Comp</h4>
+                        <p class="achieve-detail">Completed core program validation metrics at SRMCEM (2025).</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Direct Certificate Cloud Node Connection -->
+            <div class="glass-card" style="text-align: center; border-color: rgba(168, 85, 247, 0.3);">
+                <h3 style="font-family: var(--font-display); margin-bottom: 1rem;"><i class="fa-solid fa-folder-open" style="color:var(--accent-violet);"></i> Verified Credentials Vault</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;">All training badges, competition placement slips, and academic validation paperwork are hosted cleanly via cloud storage.</p>
+                <a href="https://drive.google.com/drive/folders/1NPTodqQQLVEGDySgm5VnHoxTsbcB795k" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Google Drive Directory</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Communications Hub / Contact Module -->
+    <section id="contact">
+        <div class="container contact-layout">
+            <h2 class="section-title">Establish Connection</h2>
+            <h3 class="contact-cta">Let's Build Intelligent Systems Together</h3>
+            <p style="color:var(--text-secondary); margin-bottom: 2.5rem;">Currently taking openings for advanced engineering development roles, technical research labs, and automated software workflows.</p>
+            <div class="contact-links-box">
+                <a href="mailto:jaiswalvarsh943@gmail.com" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Email Me</a>
+                <a href="https://www.linkedin.com/in/varsha-jaiswal07" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                <a href="http://github.com/V-07jais" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structural Layout System Footer -->
+    <footer>
+        <div class="container">
+            <p>Designed & Engineered by <span style="color: white; font-weight:500;">Varsha Jaiswal</span></p>
+            <p style="font-size:0.8rem; margin-top:0.5rem; color: rgba(255,255,255,0.3);">
+                &copy; 2026 Codebase Operations. Built with a <span class="heartbeat">♥</span> for Tech & Science.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts Engine: Particles, Typewriter, Intersection Observers -->
+    <script>
+        // ---- 1. Dynamic Matrix Particle Background Background Engine ----
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = '#a855f7';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor(canvas.width / 15), 80);
+            for(let i=0; i<count; i++) { particles.push(new Particle()); }
+        }
+        initParticles();
+
+        function animateBackground() {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            
+            // Subtly connect very close points
+            for(let i=0; i<particles.length; i++) {
+                for(let j=i+1; j<particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 100) {
+                        ctx.strokeStyle = `rgba(147, 51, 234, ${0.1 * (1 - dist/100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateBackground);
+        }
+        animateBackground();
+
+        // ---- 2. Automated Terminal Typing Effect Engine ----
+        const phrases = ["AI & Research Enthusiast", "Java Spring Boot Developer", "Applied Tech Learner", "Backend Architect", "Problem Solver"];
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+        const targetElement = document.getElementById('typewriter-text');
+
+        function handleTyping() {
+            const currentPhrase = phrases[phraseIdx];
+            if (isDeleting) {
+                targetElement.textContent = currentPhrase.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                targetElement.textContent = currentPhrase.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            let typingSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIdx === currentPhrase.length) {
+                typingSpeed = 2000; // Hold full sentence visible
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                typingSpeed = 400; // Breath buffer before next line
+            }
+            setTimeout(handleTyping, typingSpeed);
+        }
+        document.addEventListener('DOMContentLoaded', () => setTimeout(handleTyping, 1000));
+
+        // ---- 3. Smooth Section Reveal-on-Scroll Engine ----
+        const sections = document.querySelectorAll('section');
+        const scrollBar = document.getElementById('scroll-progress');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        sections.forEach(s => sectionObserver.observe(s));
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollBar.style.width = scrolled + "%";
+        });
+    </script>
 </body>
 </html>
